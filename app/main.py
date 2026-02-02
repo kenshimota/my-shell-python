@@ -4,7 +4,7 @@ import sys
 
 
 def main():
-    command_valids_without_type = set(["echo", "exit"])
+    command_valids_without_type = set(["echo", "exit", "type"])
 
     # TODO: Uncomment the code below to pass the first stage
     while True:
