@@ -22,9 +22,9 @@ def main():
         elif command == "type":
             if args[1] in command_valids_without_type:
                 print(f"{args[1]} is a shell builtin")
-                continue
             else:
-                command = args[1]
+                print(f"{args[1]}: not found")
+            continue
 
 
         print(f"{command}: command not found")
