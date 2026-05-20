@@ -1,12 +1,8 @@
 import sys
-
-
-
+from .src.type_command import type_command
 
 def main():
-    command_valids_without_type = set(["echo", "exit", "type"])
 
-    # TODO: Uncomment the code below to pass the first stage
     while True:
         sys.stdout.write("$ ")
         command = input()
@@ -20,10 +16,7 @@ def main():
             print(msg)
             continue
         elif command == "type":
-            if args[1] in command_valids_without_type:
-                print(f"{args[1]} is a shell builtin")
-            else:
-                print(f"{args[1]}: not found")
+            type_command(args[1])
             continue
 
 
