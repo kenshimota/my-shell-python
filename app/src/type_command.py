@@ -1,20 +1,19 @@
-from os import environ, path, listdir
-
-PATH_EXECUTE = {}
-pathnames = environ.get("PATH", "").split(":")
-
-for dir in pathnames:
-    if not path.isdir(dir):
-        continue
-
-    files = listdir(dir)
-    if not files:
-        continue
-    for command in files:
-        PATH_EXECUTE[command] = f"{dir}/{command}"
+from os import environ, path, listdir, access, X_OK
 
 def check_pathname_command(s: str) -> str:
-    return PATH_EXECUTE.get(s, '')
+    path_env = environ.get("PATH", "")
+    if not path_env:
+        return ""
+
+     for dir in path_env.split(path.pathsep):
+        if not path.isdir(dir):
+            continue
+        
+        full_path = path.join(dir, command)
+        if path.isfile(full_path) and access(full_path, X_OK):
+            return full_path
+
+    return ''
 
 def type_command(s: str):
     command_valids_without_type = set(["echo", "exit", "type"])
