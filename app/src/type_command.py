@@ -11,8 +11,6 @@ for dir in pathnames:
     if not files:
         continue
     for command in files:
-        if command in PATH_EXECUTE:
-            continue
         PATH_EXECUTE[command] = f"{dir}/{command}"
 
 def check_pathname_command(s: str) -> str:
