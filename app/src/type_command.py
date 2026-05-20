@@ -5,11 +5,10 @@ def check_pathname_command(s: str) -> str:
     if not path_env:
         return ""
 
-     for dir in path_env.split(path.pathsep):
+    for dir in path_env.split(path.pathsep):
         if not path.isdir(dir):
             continue
-        
-        full_path = path.join(dir, command)
+        full_path = path.join(dir, s)
         if path.isfile(full_path) and access(full_path, X_OK):
             return full_path
 
