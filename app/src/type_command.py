@@ -1,4 +1,6 @@
+from functools import lru_cache
 from os import environ, path, listdir, access, X_OK
+
 
 def check_pathname_command(s: str) -> str:
     path_env = environ.get("PATH", "")
@@ -13,6 +15,7 @@ def check_pathname_command(s: str) -> str:
             return full_path
 
     return ''
+
 
 def type_command(s: str):
     command_valids_without_type = set(["echo", "exit", "type"])

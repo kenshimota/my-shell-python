@@ -1,5 +1,8 @@
 import sys
+
 from .src.type_command import type_command
+from .src.run_command_external import run_command_external
+
 
 def main():
 
@@ -19,8 +22,12 @@ def main():
             type_command(args[1])
             continue
 
+        executed = run_command_external(args)
+        if executed:
+            continue
 
         print(f"{command}: command not found")
+
 
 if __name__ == "__main__":
     main()
