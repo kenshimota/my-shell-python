@@ -18,7 +18,7 @@ def check_pathname_command(s: str) -> str:
 
 
 def type_command(s: str):
-    command_valids_without_type = set(["echo", "exit", "type"])
+    command_valids_without_type = set(["echo", "exit", "type", "pwd"])
 
     if s in command_valids_without_type:
         print(f"{s} is a shell builtin")
