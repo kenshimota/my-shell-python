@@ -1,5 +1,6 @@
 import sys
 
+from .src.pwd import pwd
 from .src.type_command import type_command
 from .src.run_command_external import run_command_external
 
@@ -20,6 +21,9 @@ def main():
             continue
         elif command == "type":
             type_command(args[1])
+            continue
+        elif command == "pwd":
+            pwd()
             continue
 
         executed = run_command_external(args)
