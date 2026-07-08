@@ -1,4 +1,5 @@
 from os import chdir
+from os.path import isdir
 from typing import List
 
 from .pwd import current_pathname
@@ -29,4 +30,9 @@ def cd(args: List[str]):
 
     pathname = "/".join(stack)
     pathname = f"/{pathname}"
+
+    if not isdir(pathname):
+        print(f"cd: {pathname}: No such file or directory")
+        return
+
     chdir(pathname)
