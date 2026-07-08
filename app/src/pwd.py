@@ -1,5 +1,9 @@
 from os import getcwd
 
 
+def current_pathname():
+    return getcwd()
+
+
 def pwd():
-    print(f"{getcwd()}")
+    print(f"{current_pathname()}")

@@ -1,5 +1,6 @@
 import sys
 
+from .src.cd import cd
 from .src.pwd import pwd
 from .src.type_command import type_command
 from .src.run_command_external import run_command_external
@@ -25,6 +26,8 @@ def main():
         elif command == "pwd":
             pwd()
             continue
+        elif command == "cd":
+            cd(args)
 
         executed = run_command_external(args)
         if executed:
