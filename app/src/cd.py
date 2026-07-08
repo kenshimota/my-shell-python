@@ -15,7 +15,8 @@ def cd(args: List[str]):
         return
 
     path = args[1]
-    pathname = f'{current_pathname()}/{path}'.strip()
+    pathname = f'{
+        current_pathname()}/{path}'.strip() if path[0] != '/' else path
     splitted = pathname.split('/')
     stack = []
 
