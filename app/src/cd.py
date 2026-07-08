@@ -27,8 +27,6 @@ def cd(args: List[str]):
         elif s != '..':
             stack.append(s)
 
-        print(stack)
-
     pathname = "/".join(stack)
     pathname = f"/{pathname}"
     chdir(pathname)

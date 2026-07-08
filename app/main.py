@@ -28,6 +28,7 @@ def main():
             continue
         elif command == "cd":
             cd(args)
+            continue
 
         executed = run_command_external(args)
         if executed:
