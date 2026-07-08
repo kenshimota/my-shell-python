@@ -1,4 +1,4 @@
-from os import chdir
+from os import chdir, getenv
 from os.path import isdir
 from typing import List
 
@@ -14,9 +14,12 @@ def cd(args: List[str]):
         print("there are many arguments")
         return
 
-    path = args[1]
-    pathname = f'{
-        current_pathname()}/{path}'.strip() if path[0] != '/' else path
+    pathname = args[1]
+    if pathname[0] == "~":
+        pathname = f"{getenv("HOME")}{pathname[1:]}"
+    elif pathname[0] != "~" and pathname[0] != "/":
+        pathname = f"{current_pathname()}/${pathname}"
+
     splitted = pathname.split('/')
     stack = []
 
