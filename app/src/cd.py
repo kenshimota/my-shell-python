@@ -17,8 +17,8 @@ def cd(args: List[str]):
     pathname = args[1]
     if pathname[0] == "~":
         pathname = f"{getenv("HOME")}{pathname[1:]}"
-    elif pathname[0] != "~" and pathname[0] != "/":
-        pathname = f"{current_pathname()}/${pathname}"
+    elif (pathname[0] != "~" and pathname[0] != "/") or pathname == ".":
+        pathname = f"{current_pathname()}/{pathname}"
 
     splitted = pathname.split('/')
     stack = []
