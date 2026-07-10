@@ -1,17 +1,17 @@
 import sys
 
-from .src.cd import cd
-from .src.pwd import pwd
-from .src.type_command import type_command
-from .src.run_command_external import run_command_external
+from .src.bin.cd import cd
+from .src.bin.pwd import pwd
+from .src.bin.type_command import type_command
+from .src.helpers.process_arguments import process_arguments
+from .src.bin.run_command_external import run_command_external
 
 
 def main():
 
     while True:
         sys.stdout.write("$ ")
-        command = input()
-        args = command.strip().split(" ")
+        args = process_arguments(input(''))
         command = args[0]
 
         if command == "exit":
