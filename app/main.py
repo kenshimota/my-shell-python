@@ -17,7 +17,7 @@ def main():
 
         if command == "exit":
             exit(0)
-        elif '>' in args or '1>' in args:
+        elif '>' in args or '1>' in args or '2>' in args:
             os.system(" ".join(args))
             continue
         elif command == "echo":
