@@ -1,4 +1,5 @@
 import sys
+import os
 
 from .src.bin.cd import cd
 from .src.bin.pwd import pwd
@@ -16,6 +17,9 @@ def main():
 
         if command == "exit":
             exit(0)
+        elif '>' in args or '1>' in args:
+            os.system(" ".join(args))
+            continue
         elif command == "echo":
             msg = " ".join(args[1:])
             print(msg)
