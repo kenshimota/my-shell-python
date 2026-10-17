@@ -1,34 +1,54 @@
-[![progress-banner](https://backend.codecrafters.io/progress/shell/7033b96f-0af0-41f9-aa3b-9b456a279198)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# my-shell-python
 
-This is a starting point for Python solutions to the
-["Build Your Own Shell" Challenge](https://app.codecrafters.io/courses/shell/overview).
+Implementación de una shell POSIX construida desde cero en Python para el reto [Build Your Own Shell](https://app.codecrafters.io/courses/shell/overview) de CodeCrafters.
 
-In this challenge, you'll build your own POSIX compliant shell that's capable of
-interpreting shell commands, running external programs and builtin commands like
-cd, pwd, echo and more. Along the way, you'll learn about shell command parsing,
-REPLs, builtin commands, and more.
+## Funcionalidad
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+- REPL con prompt `$`.
+- Builtins: `echo`, `type`, `pwd`, `cd` y `exit`.
+- Ejecución de comandos externos con búsqueda en `PATH`.
+- Redirección de salida (`>`, `1>`, `2>`).
+- División de argumentos con `shlex`, respetando comillas.
+- `cd` con soporte para `~`, rutas relativas, absolutas y `..`.
 
-# Passing the first stage
+## Estructura
 
-The entry point for your `shell` implementation is in `app/main.py`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
-
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
+```
+app/
+├── main.py                     # REPL y despacho de comandos
+└── src/
+    ├── bin/
+    │   ├── cd.py               # builtin cd
+    │   ├── pwd.py              # builtin pwd
+    │   ├── type_command.py     # builtin type y búsqueda en PATH
+    │   └── run_command_external.py
+    └── helpers/
+        └── process_arguments.py
 ```
 
-Time to move on to the next stage!
+## Requisitos
 
-# Stage 2 & beyond
+- Python 3.14
+- [uv](https://docs.astral.sh/uv/)
 
-Note: This section is for stages 2 and beyond.
+## Uso
 
-1. Ensure you have `uv` installed locally
-1. Run `./your_program.sh` to run your program, which is implemented in
-   `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+```bash
+./your_program.sh
+```
+
+Ejemplo:
+
+```text
+$ echo hola
+hola
+$ pwd
+/home/usuario
+$ cd ..
+$ type cd
+cd is a shell builtin
+```
+
+## Estado
+
+Proyecto en desarrollo. Nuevas etapas del reto se agregan a medida que avanzan.
