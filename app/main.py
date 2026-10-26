@@ -1,13 +1,17 @@
 import sys
-import subprocess
+from pathlib import Path
 from typing import List
+
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+    __package__ = "app"
 
 from .src.bin.cd import cd
 from .src.bin.pwd import pwd
-from .src.bin.type_command import type_command
-from .src.helpers.process_arguments import process_arguments, custom_input_cmd, apply_completer
 from .src.bin.run_command_external import run_command_external
-
+from .src.bin.type_command import type_command
+from .src.helpers.print_or_write_out import PrintOrWriteOut
+from .src.helpers.process_arguments import apply_completer, custom_input_cmd, process_arguments
 
 def is_writteable_file(s: List[str]) -> int:
     commands = ['>', '1>', '2>', '>>', '1>>', '2>>']
@@ -22,6 +26,7 @@ def main():
     apply_completer()
 
     while True:
+        output = PrintOrWriteOut()
         writtable_files = []
         command_without_out = []
         sys.stdout.write("$ ")
@@ -41,29 +46,26 @@ def main():
             writtable_files = args[i:]
             command_without_out = args[:i]
 
-        print(writtable_files)
-        print(command_without_out)
-
+        output.process_args(args)
         if command == "echo":
             msg = " ".join(command_without_out[1:])
-            print(msg)
+            output.out(f"{msg}\n")
             continue
         elif command == "type":
-            type_command(args[1])
+            type_command(args[1], output)
             continue
         elif command == "pwd":
-            pwd()
+            pwd(output)
             continue
         elif command == "cd":
-            cd(args)
+            cd(command_without_out[1:])
             continue
 
         executed = run_command_external(args)
         if executed:
             continue
 
-        print(f"{command}: command not found")
-
+        output.err(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()

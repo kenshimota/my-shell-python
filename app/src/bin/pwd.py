@@ -1,9 +1,6 @@
-from os import getcwd
+from ..helpers.pathname import current_pathname
+from ..helpers.print_or_write_out import PrintOrWriteOut
 
 
-def current_pathname():
-    return getcwd()
-
-
-def pwd():
-    print(f"{current_pathname()}")
+def pwd(output: PrintOrWriteOut):
+    output.out(f"{current_pathname()}")

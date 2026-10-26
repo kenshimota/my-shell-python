@@ -1,41 +1,21 @@
-from os import chdir, getenv
-from os.path import isdir
+from os import chdir
 from typing import List
 
-from .pwd import current_pathname
+from ..helpers.pathname import get_pathname_direction, is_directory
 
 
 def cd(args: List[str]):
-    if len(args) < 2:
-        print("you have use unless 2 arguments")
+    if len(args) < 1:
+        print("you have use unless 1 argument")
         return
 
-    if len(args) > 2:
+    if len(args) > 1:
         print("there are many arguments")
         return
 
-    pathname = args[1]
-    if pathname[0] == "~":
-        pathname = f"{getenv("HOME")}{pathname[1:]}"
-    elif (pathname[0] != "~" and pathname[0] != "/") or pathname == ".":
-        pathname = f"{current_pathname()}/{pathname}"
+    pathname = get_pathname_direction(args[0])
 
-    splitted = pathname.split('/')
-    stack = []
-
-    for s in splitted:
-        if not s or s == '.':
-            continue
-
-        if s == '..' and stack:
-            stack.pop()
-        elif s != '..':
-            stack.append(s)
-
-    pathname = "/".join(stack)
-    pathname = f"/{pathname}"
-
-    if not isdir(pathname):
+    if not is_directory(pathname):
         print(f"cd: {pathname}: No such file or directory")
         return
 
