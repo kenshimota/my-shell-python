@@ -3,4 +3,4 @@ from ..helpers.print_or_write_out import PrintOrWriteOut
 
 
 def pwd(output: PrintOrWriteOut):
-    output.out(f"{current_pathname()}")
+    output.out(f"{current_pathname()}\n")

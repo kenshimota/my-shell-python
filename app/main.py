@@ -41,10 +41,9 @@ def main():
             exit(0)
 
         i = is_writteable_file(args)
-        if i >= 1:
-            i = is_writteable_file(args)
+        command_without_out = args[:i] if i >= 0 else args
+        if i >= 0:
             writtable_files = args[i:]
-            command_without_out = args[:i]
 
         output.process_args(args)
         if command == "echo":
@@ -61,11 +60,11 @@ def main():
             cd(command_without_out[1:])
             continue
 
-        executed = run_command_external(args)
+        executed = run_command_external(command_without_out, output)
         if executed:
             continue
 
-        output.err(f"{command}: command not found")
+        output.err(f"{command}: command not found\n")
 
 if __name__ == "__main__":
     main()

@@ -22,10 +22,10 @@ def type_command(s: str, output: PrintOrWriteOut):
     command_valids_without_type = set(["echo", "exit", "type", "pwd", "cd"])
 
     if s in command_valids_without_type:
-        output.out(f"{s} is a shell builtin")
+        output.out(f"{s} is a shell builtin\n")
     else:
         pathname = check_pathname_command(s)
         if pathname:
-            output.out(f"{s}: {pathname}")
+            output.out(f"{s} is {pathname}\n")
         else:
-            output.err(f"{s}: not found")
+            output.err(f"{s}: not found\n")

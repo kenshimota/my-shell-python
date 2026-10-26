@@ -1,20 +1,19 @@
-import sys
 from typing import List
-from subprocess import run, CalledProcessError
+from subprocess import run
 
+from ..helpers.print_or_write_out import PrintOrWriteOut
 from .type_command import check_pathname_command
 
 
-def run_command_external(args: List[str]) -> bool:
+def run_command_external(args: List[str], output: PrintOrWriteOut) -> bool:
     pathname = check_pathname_command(args[0])
     if not pathname:
         return False
 
-    output = run(" ".join(args), shell=True,  capture_output=True, text=True)
+    result = run(args, executable=pathname, capture_output=True, text=True)
 
-    if output.stderr:
-        sys.stderr.write(output.stderr)
-        return True
-
-    sys.stdout.write(output.stdout)
+    if result.stdout:
+        output.out(result.stdout)
+    if result.stderr:
+        output.err(result.stderr)
     return True
