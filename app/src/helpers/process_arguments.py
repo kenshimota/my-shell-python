@@ -2,10 +2,11 @@ from typing import List
 from shlex import split
 import readline
 from readline import set_completer, parse_and_bind
+from .get_filename_from_enviroment import get_command_from_enviroment
 
 
 def my_completer(text: str, state: int):
-    BUILTINS = ("cd", "echo", "exit", "pwd", "type")
+    BUILTINS = get_command_from_enviroment()
     matches = [c + " " for c in BUILTINS if c.startswith(text)]
     try:
         return matches[state]
