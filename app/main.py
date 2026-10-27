@@ -29,8 +29,7 @@ def main():
         output = PrintOrWriteOut()
         writtable_files = []
         command_without_out = []
-        sys.stdout.write("$ ")
-        args = process_arguments(custom_input_cmd(''))
+        args = process_arguments(custom_input_cmd('$ '))
 
         if not args:
             continue
